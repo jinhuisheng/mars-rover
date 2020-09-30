@@ -2,64 +2,75 @@ package kata;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * @author huisheng.jin
- * @date 2020/4/26.
+ * @date 2020/9/29.
  */
 public class MarsRoverTest {
-//    @Test
-//    void demo() {
-//        MarsRover marsRover = new MarsRover(0, 0, "N");
-//        marsRover.send("LL");
-//        assertThat(marsRover.getX()).isEqualTo(0);
-//        assertThat(marsRover.getY()).isEqualTo(0);
-//        assertThat(marsRover.getDirection()).isEqualTo("S");
-//    }
-
     @Test
-    void init_marsRover() {
-        MarsRover marsRover = new MarsRover(0, 0, "N");
+    void init_marsRover_success() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.N);
         assertThat(marsRover.getX()).isEqualTo(0);
         assertThat(marsRover.getY()).isEqualTo(0);
-        assertThat(marsRover.getDirection()).isEqualTo("N");
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.N);
     }
 
     @Test
-    void direction_change_from_N_to_W_when_turn_left() {
-        MarsRover marsRover = new MarsRover(0, 0, "N");
-        marsRover.send("L");
-        assertThat(marsRover.getX()).isEqualTo(0);
-        assertThat(marsRover.getY()).isEqualTo(0);
-        assertThat(marsRover.getDirection()).isEqualTo("W");
+    void should_be_W_given_N_when_turn_left() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.N);
+        marsRover.turnLeft();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.W);
     }
 
     @Test
-    void direction_change_from_S_to_E_when_turn_left() {
-        MarsRover marsRover = new MarsRover(0, 0, "S");
-        marsRover.send("L");
-        assertThat(marsRover.getX()).isEqualTo(0);
-        assertThat(marsRover.getY()).isEqualTo(0);
-        assertThat(marsRover.getDirection()).isEqualTo("E");
+    void should_be_S_given_W_when_turn_left() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.W);
+        marsRover.turnLeft();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.S);
     }
 
     @Test
-    void direction_change_from_E_to_N_when_turn_left() {
-        MarsRover marsRover = new MarsRover(0, 0, "E");
-        marsRover.send("L");
-        assertThat(marsRover.getX()).isEqualTo(0);
-        assertThat(marsRover.getY()).isEqualTo(0);
-        assertThat(marsRover.getDirection()).isEqualTo("N");
+    void should_be_E_given_S_when_turn_left() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.S);
+        marsRover.turnLeft();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.E);
     }
 
     @Test
-    void direction_change_from_W_to_S_when_turn_left() {
-        MarsRover marsRover = new MarsRover(0, 0, "W");
-        marsRover.send("L");
-        assertThat(marsRover.getX()).isEqualTo(0);
-        assertThat(marsRover.getY()).isEqualTo(0);
-        assertThat(marsRover.getDirection()).isEqualTo("S");
+    void should_be_N_given_E_when_turn_left() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.E);
+        marsRover.turnLeft();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.N);
+    }
+
+    @Test
+    void should_be_E_given_N_when_turn_right() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.N);
+        marsRover.turnRight();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.E);
+    }
+
+    @Test
+    void should_be_S_given_E_when_turn_right() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.E);
+        marsRover.turnRight();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.S);
+    }
+
+    @Test
+    void should_be_W_given_S_when_turn_right() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.S);
+        marsRover.turnRight();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.W);
+    }
+
+    @Test
+    void should_be_N_given_W_when_turn_right() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.W);
+        marsRover.turnRight();
+        assertThat(marsRover.getDirection()).isEqualTo(Direction.N);
     }
 
 }

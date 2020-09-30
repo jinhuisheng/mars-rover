@@ -2,40 +2,36 @@ package kata;
 
 /**
  * @author huisheng.jin
- * @date 2020/4/26.
+ * @date 2020/9/29.
  */
 public class MarsRover {
-    private final Integer x;
-    private final Integer y;
-    private String direction;
+    private int x;
+    private int y;
+    private Direction direction;
 
-    public MarsRover(Integer x, Integer y, String direction) {
+    public MarsRover(int x, int y, Direction directionNum) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.direction = directionNum;
     }
 
-    public Integer getX() {
+    public int getX() {
         return x;
     }
 
-    public Integer getY() {
+    public int getY() {
         return y;
     }
 
-    public String getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
-    public void send(String command) {
-        if (this.direction.equals("S")) {
-            this.direction = "E";
-        } else if (this.direction.equals("E")) {
-            this.direction = "N";
-        } else if (this.direction.equals("N")) {
-            this.direction = "W";
-        } else if (this.direction.equals("W")) {
-            this.direction = "S";
-        }
+    public void turnLeft() {
+        this.direction = direction.left();
+    }
+
+    public void turnRight() {
+        this.direction = direction.right();
     }
 }
