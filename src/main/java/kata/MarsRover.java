@@ -5,22 +5,20 @@ package kata;
  * @date 2020/9/29.
  */
 public class MarsRover {
-    private int x;
-    private int y;
     private Direction direction;
+    private Coordinate coordinate;
 
     public MarsRover(int x, int y, Direction directionNum) {
-        this.x = x;
-        this.y = y;
+        this.coordinate = new Coordinate(x, y);
         this.direction = directionNum;
     }
 
     public int getX() {
-        return x;
+        return this.coordinate.getX();
     }
 
     public int getY() {
-        return y;
+        return this.coordinate.getY();
     }
 
     public Direction getDirection() {
@@ -33,5 +31,13 @@ public class MarsRover {
 
     public void turnRight() {
         this.direction = direction.right();
+    }
+
+    public void forward() {
+        this.coordinate = coordinate.forward(this.direction);
+    }
+
+    public void back() {
+        this.coordinate = coordinate.back(this.direction);
     }
 }

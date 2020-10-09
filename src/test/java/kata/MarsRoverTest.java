@@ -73,4 +73,68 @@ public class MarsRoverTest {
         assertThat(marsRover.getDirection()).isEqualTo(Direction.N);
     }
 
+    @Test
+    void should_forward_right_when_direction_is_North() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.N);
+        marsRover.forward();
+        assertThat(marsRover.getX()).isEqualTo(0);
+        assertThat(marsRover.getY()).isEqualTo(1);
+    }
+
+    @Test
+    void should_forward_right_when_direction_is_South() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.S);
+        marsRover.forward();
+        assertThat(marsRover.getX()).isEqualTo(0);
+        assertThat(marsRover.getY()).isEqualTo(-1);
+    }
+
+    @Test
+    void should_forward_right_when_direction_is_West() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.W);
+        marsRover.forward();
+        assertThat(marsRover.getX()).isEqualTo(-1);
+        assertThat(marsRover.getY()).isEqualTo(0);
+    }
+
+    @Test
+    void should_forward_right_when_direction_is_East() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.E);
+        marsRover.forward();
+        assertThat(marsRover.getX()).isEqualTo(1);
+        assertThat(marsRover.getY()).isEqualTo(0);
+    }
+
+    @Test
+    void should_back_right_when_direction_is_North() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.N);
+        marsRover.back();
+        assertThat(marsRover.getX()).isEqualTo(0);
+        assertThat(marsRover.getY()).isEqualTo(-1);
+    }
+
+    @Test
+    void should_back_right_when_direction_is_South() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.S);
+        marsRover.back();
+        assertThat(marsRover.getX()).isEqualTo(0);
+        assertThat(marsRover.getY()).isEqualTo(1);
+    }
+
+    @Test
+    void should_back_right_when_direction_is_West() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.W);
+        marsRover.back();
+        assertThat(marsRover.getX()).isEqualTo(1);
+        assertThat(marsRover.getY()).isEqualTo(0);
+    }
+
+    @Test
+    void should_back_right_when_direction_is_East() {
+        MarsRover marsRover = new MarsRover(0, 0, Direction.E);
+        marsRover.back();
+        assertThat(marsRover.getX()).isEqualTo(-1);
+        assertThat(marsRover.getY()).isEqualTo(0);
+    }
+
 }
