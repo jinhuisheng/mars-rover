@@ -3,7 +3,6 @@ package kata;
 import kata.command.*;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 /**
  * @author huisheng.jin
@@ -12,19 +11,12 @@ import java.util.HashMap;
 public class MarsRover {
     private Direction direction;
     private Coordinate coordinate;
-    private HashMap<String, Command> commandHandlers = new HashMap<>();
+    private CommandContainer commandContainer;
 
     public MarsRover(Coordinate coordinate, Direction direction) {
         this.direction = direction;
         this.coordinate = coordinate;
-        initCommandHandler();
-    }
-
-    private void initCommandHandler() {
-        commandHandlers.put("l", new TurnLeftCommand());
-        commandHandlers.put("r", new TurnRightCommand());
-        commandHandlers.put("f", new ForwardCommand());
-        commandHandlers.put("b", new BackCommand());
+        this.commandContainer = new CommandContainer();
     }
 
     public void executeCommands(String commands) {
@@ -32,7 +24,7 @@ public class MarsRover {
     }
 
     private void execute(String command) {
-        Command commandHandler = commandHandlers.get(command);
+        Command commandHandler = commandContainer.get(command);
         commandHandler.execute(this);
     }
 
