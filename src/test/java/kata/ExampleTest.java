@@ -9,4 +9,9 @@ public class ExampleTest {
     void should_success() {
         assertThat(1).isEqualTo(1);
     }
+    @Test
+    public void should_go()
+    {
+        assertThat(1).isEqualTo(1);
+    }
 }
