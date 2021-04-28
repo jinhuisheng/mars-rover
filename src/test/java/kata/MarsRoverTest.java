@@ -1,6 +1,8 @@
 package kata;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -45,77 +47,34 @@ public class MarsRoverTest {
         assertThat(rover.getY()).isEqualTo(1);
     }
 
-    @Test
-    void should_turn_left_to_west_given_direction_is_north() {
-        MarsRover rover = new MarsRover(2, 3, "N");
-        rover.executeCommands("L");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("W");
+    @ParameterizedTest
+    @CsvSource({
+            "N,W",
+            "E,N",
+            "S,E",
+            "W,S",
+    })
+    void should_turn_left_success(String currentDirection, String expectedDirection) {
+        turnTo("L", currentDirection, expectedDirection);
     }
 
-    @Test
-    void should_turn_left_to_north_given_direction_is_east() {
-        MarsRover rover = new MarsRover(2, 3, "E");
-        rover.executeCommands("L");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("N");
+    @ParameterizedTest
+    @CsvSource({
+            "E,S",
+            "S,W",
+            "W,N",
+            "N,E",
+    })
+    void should_turn_right_success(String currentDirection, String expectedDirection) {
+        turnTo("R", currentDirection, expectedDirection);
     }
 
-    @Test
-    void should_turn_left_to_east_given_direction_is_south() {
-        MarsRover rover = new MarsRover(2, 3, "S");
-        rover.executeCommands("L");
+    private void turnTo(String command, String currentDirection, String expectedDirection) {
+        MarsRover rover = new MarsRover(2, 3, currentDirection);
+        rover.executeCommands(command);
         assertThat(rover.getX()).isEqualTo(2);
         assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("E");
+        assertThat(rover.getDirection()).isEqualTo(expectedDirection);
     }
-
-    @Test
-    void should_turn_left_to_south_given_direction_is_west() {
-        MarsRover rover = new MarsRover(2, 3, "W");
-        rover.executeCommands("L");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("S");
-    }
-
-    @Test
-    void should_turn_right_to_south_given_direction_is_east() {
-        MarsRover rover = new MarsRover(2, 3, "E");
-        rover.executeCommands("R");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("S");
-    }
-
-    @Test
-    void should_turn_right_to_east_given_direction_is_south() {
-        MarsRover rover = new MarsRover(2, 3, "S");
-        rover.executeCommands("R");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("W");
-    }
-
-    @Test
-    void should_turn_right_to_north_given_direction_is_west() {
-        MarsRover rover = new MarsRover(2, 3, "W");
-        rover.executeCommands("R");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("N");
-    }
-
-    @Test
-    void should_turn_right_to_east_given_direction_is_north() {
-        MarsRover rover = new MarsRover(2, 3, "N");
-        rover.executeCommands("R");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(3);
-        assertThat(rover.getDirection()).isEqualTo("E");
-    }
-
 
 }
