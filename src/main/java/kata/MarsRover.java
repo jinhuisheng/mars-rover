@@ -1,7 +1,5 @@
 package kata;
 
-import kata.command.*;
-
 import java.util.Arrays;
 
 /**
@@ -11,12 +9,12 @@ import java.util.Arrays;
 public class MarsRover {
     private Direction direction;
     private Coordinate coordinate;
-    private CommandContainer commandContainer;
+    private final Commands commands;
 
     public MarsRover(Coordinate coordinate, Direction direction) {
         this.direction = direction;
         this.coordinate = coordinate;
-        this.commandContainer = new CommandContainer();
+        this.commands = new Commands(this);
     }
 
     public void executeCommands(String commands) {
@@ -24,8 +22,7 @@ public class MarsRover {
     }
 
     private void execute(String command) {
-        Command commandHandler = commandContainer.get(command);
-        commandHandler.execute(this);
+        commands.get(command).run();
     }
 
     public Integer getX() {
@@ -41,18 +38,18 @@ public class MarsRover {
     }
 
     public void turnLeft() {
-        this.direction = this.direction.left();
+        direction = direction.left();
     }
 
     public void turnRight() {
-        this.direction = this.direction.right();
+        direction = direction.right();
     }
 
     public void forward() {
-        this.coordinate = this.coordinate.forward(this.direction);
+        coordinate.forward(direction);
     }
 
     public void back() {
-        this.coordinate = this.coordinate.back(this.direction);
+        coordinate.back(direction);
     }
 }
