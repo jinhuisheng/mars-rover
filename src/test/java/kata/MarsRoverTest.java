@@ -6,9 +6,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class MarsRoverTest {
+class MarsRoverTest {
     @Test
-    public void should_move_forward_to_x_is_2_and_y_is_4_when_direction_is_north_given_commands_is_f() {
+    void should_move_forward_success_when_direction_is_north() {
         MarsRover rover = new MarsRover(2, 3, "N");
         rover.executeCommands("F");
         assertThat(rover.getX()).isEqualTo(2);
@@ -16,7 +16,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_move_forward_to_x_is_3_and_y_is_3_when_direction_is_east_given_commands_is_f() {
+    void should_move_forward_success_when_direction_is_east() {
         MarsRover rover = new MarsRover(2, 3, "E");
         rover.executeCommands("F");
         assertThat(rover.getX()).isEqualTo(3);
@@ -24,27 +24,11 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_move_forward_to_x_is_2_and_y_is_5_given_commands_is_ff() {
-        MarsRover rover = new MarsRover(2, 3, "N");
-        rover.executeCommands("FF");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(5);
-    }
-
-    @Test
-    public void should_move_back_to_x_is_2_and_y_is_2_given_commands_is_b() {
+    void should_move_back_success_when_direction_is_north() {
         MarsRover rover = new MarsRover(2, 3, "N");
         rover.executeCommands("B");
         assertThat(rover.getX()).isEqualTo(2);
         assertThat(rover.getY()).isEqualTo(2);
-    }
-
-    @Test
-    public void should_move_back_x_2_and_y_1_given_commands_is_bb() {
-        MarsRover rover = new MarsRover(2, 3, "N");
-        rover.executeCommands("BB");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(1);
     }
 
     @ParameterizedTest
