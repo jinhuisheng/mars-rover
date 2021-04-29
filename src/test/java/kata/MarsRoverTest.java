@@ -15,10 +15,7 @@ class MarsRoverTest {
             "2,3,W,1,3",
     })
     void should_move_forward_success(int rawX, int rawY, String direction, int expectedX, int expectedY) {
-        MarsRover rover = new MarsRover(rawX, rawY, direction);
-        rover.executeCommands("F");
-        assertThat(rover.getX()).isEqualTo(expectedX);
-        assertThat(rover.getY()).isEqualTo(expectedY);
+        moveTo(rawX, rawY, direction, expectedX, expectedY, "F");
     }
 
     @ParameterizedTest
@@ -29,8 +26,12 @@ class MarsRoverTest {
             "2,3,W,3,3",
     })
     void should_move_back_success(int rawX, int rawY, String direction, int expectedX, int expectedY) {
+        moveTo(rawX, rawY, direction, expectedX, expectedY, "B");
+    }
+
+    private void moveTo(int rawX, int rawY, String direction, int expectedX, int expectedY, String command) {
         MarsRover rover = new MarsRover(rawX, rawY, direction);
-        rover.executeCommands("B");
+        rover.executeCommands(command);
         assertThat(rover.getX()).isEqualTo(expectedX);
         assertThat(rover.getY()).isEqualTo(expectedY);
     }
