@@ -1,10 +1,10 @@
 package kata;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MarsRover {
-
     private int x;
     private int y;
     private String direction;
@@ -21,36 +21,45 @@ public class MarsRover {
         Map<String, Command> map = new HashMap<>();
         map.put("L", new TurnLeftCommand());
         map.put("R", new TurnRightCommand());
+        map.put("F", new ForwardCommand());
+        map.put("B", new BackCommand());
         return map;
     }
 
     public void execute(String command) {
-        if (command.equals("L") || command.equals("R")) {
-            commandExecutors.get(command).execute(this);
-            return;
-        }
-        if (command.equals("B")) {
-            y = y - 1;
-            return;
-        }
-
-        forward();
+        commandExecutors.get(command).execute(this);
     }
 
-    private void forward() {
-        if (direction.equals("E")) {
-            x += 1;
-            return;
-        }
+    public void back() {
+        DirectionFactory.of(direction).back(this);
+    }
+
+    public void forward() {
+        DirectionFactory.of(direction).forward(this);
+    }
+
+    public void decreaseX() {
+        x -= 1;
+    }
+
+    public void decreaseY() {
+        y -= 1;
+    }
+
+    public void increaseX() {
+        x += 1;
+    }
+
+    public void increaseY() {
         y = y + 1;
     }
 
     public void turnRight() {
-        direction = Direction.right(direction);
+        direction = Directions.right(direction);
     }
 
     public void turnLeft() {
-        direction = Direction.left(direction);
+        direction = Directions.left(direction);
     }
 
     public int getX() {
@@ -62,9 +71,7 @@ public class MarsRover {
     }
 
     public void executeCommands(String commands) {
-        for (String command : commands.split("")) {
-            execute(command);
-        }
+        Arrays.stream(commands.split("")).forEach(this::execute);
     }
 
     public String getDirection() {

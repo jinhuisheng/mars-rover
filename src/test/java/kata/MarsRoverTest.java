@@ -1,34 +1,38 @@
 package kata;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 class MarsRoverTest {
-    @Test
-    void should_move_forward_success_when_direction_is_north() {
-        MarsRover rover = new MarsRover(2, 3, "N");
+
+    @ParameterizedTest
+    @CsvSource({
+            "2,3,N,2,4",
+            "2,3,E,3,3",
+            "2,3,S,2,2",
+            "2,3,W,1,3",
+    })
+    void should_move_forward_success(int rawX, int rawY, String direction, int expectedX, int expectedY) {
+        MarsRover rover = new MarsRover(rawX, rawY, direction);
         rover.executeCommands("F");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(4);
+        assertThat(rover.getX()).isEqualTo(expectedX);
+        assertThat(rover.getY()).isEqualTo(expectedY);
     }
 
-    @Test
-    void should_move_forward_success_when_direction_is_east() {
-        MarsRover rover = new MarsRover(2, 3, "E");
-        rover.executeCommands("F");
-        assertThat(rover.getX()).isEqualTo(3);
-        assertThat(rover.getY()).isEqualTo(3);
-    }
-
-    @Test
-    void should_move_back_success_when_direction_is_north() {
-        MarsRover rover = new MarsRover(2, 3, "N");
+    @ParameterizedTest
+    @CsvSource({
+            "2,3,N,2,2",
+            "2,3,E,1,3",
+            "2,3,S,2,4",
+            "2,3,W,3,3",
+    })
+    void should_move_back_success(int rawX, int rawY, String direction, int expectedX, int expectedY) {
+        MarsRover rover = new MarsRover(rawX, rawY, direction);
         rover.executeCommands("B");
-        assertThat(rover.getX()).isEqualTo(2);
-        assertThat(rover.getY()).isEqualTo(2);
+        assertThat(rover.getX()).isEqualTo(expectedX);
+        assertThat(rover.getY()).isEqualTo(expectedY);
     }
 
     @ParameterizedTest
