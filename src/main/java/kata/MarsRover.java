@@ -1,33 +1,24 @@
 package kata;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MarsRover {
     private int x;
     private int y;
     private String direction;
-    private final Map<String, Command> commandExecutors;
 
     public MarsRover(int x, int y, String direction) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.commandExecutors = initCommands();
     }
 
-    private Map<String, Command> initCommands() {
-        Map<String, Command> map = new HashMap<>();
-        map.put("L", new TurnLeftCommand());
-        map.put("R", new TurnRightCommand());
-        map.put("F", new ForwardCommand());
-        map.put("B", new BackCommand());
-        return map;
+    public void executeCommands(String commands) {
+        Arrays.stream(commands.split("")).forEach(this::execute);
     }
 
     public void execute(String command) {
-        commandExecutors.get(command).execute(this);
+        CommandFactory.of(command).execute(this);
     }
 
     public void back() {
@@ -68,10 +59,6 @@ public class MarsRover {
 
     public int getY() {
         return y;
-    }
-
-    public void executeCommands(String commands) {
-        Arrays.stream(commands.split("")).forEach(this::execute);
     }
 
     public String getDirection() {
