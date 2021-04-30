@@ -1,11 +1,11 @@
-package kata;
+package kata.command;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandFactory {
 
-    private final static Map<String, Command> EXECUTORS;
+    private static final Map<String, Command> EXECUTORS;
 
     static {
         EXECUTORS = new HashMap<>();

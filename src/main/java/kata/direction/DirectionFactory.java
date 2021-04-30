@@ -1,4 +1,4 @@
-package kata;
+package kata.direction;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ public class DirectionFactory {
         DIRECTION_MAP.put("N", new NorthDirection());
     }
 
-    static Direction of(String direction) {
+    public static Direction of(String direction) {
         return DIRECTION_MAP.get(direction);
     }
 }

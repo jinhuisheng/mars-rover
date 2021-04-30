@@ -1,4 +1,6 @@
-package kata;
+package kata.command;
+
+import kata.MarsRover;
 
 public class TurnRightCommand implements Command {
     @Override

@@ -1,4 +1,4 @@
-package kata;
+package kata.direction;
 
 import java.util.ArrayList;
 import java.util.List;

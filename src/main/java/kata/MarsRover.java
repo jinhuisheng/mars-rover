@@ -1,15 +1,17 @@
 package kata;
 
+import kata.command.CommandFactory;
+import kata.direction.DirectionFactory;
+import kata.direction.Directions;
+
 import java.util.Arrays;
 
 public class MarsRover {
-    private int x;
-    private int y;
     private String direction;
+    private final Coordinate coordinate;
 
     public MarsRover(int x, int y, String direction) {
-        this.x = x;
-        this.y = y;
+        this.coordinate = new Coordinate(x, y);
         this.direction = direction;
     }
 
@@ -22,27 +24,11 @@ public class MarsRover {
     }
 
     public void back() {
-        DirectionFactory.of(direction).back(this);
+        DirectionFactory.of(direction).back(coordinate);
     }
 
     public void forward() {
-        DirectionFactory.of(direction).forward(this);
-    }
-
-    public void decreaseX() {
-        x -= 1;
-    }
-
-    public void decreaseY() {
-        y -= 1;
-    }
-
-    public void increaseX() {
-        x += 1;
-    }
-
-    public void increaseY() {
-        y = y + 1;
+        DirectionFactory.of(direction).forward(coordinate);
     }
 
     public void turnRight() {
@@ -54,11 +40,11 @@ public class MarsRover {
     }
 
     public int getX() {
-        return x;
+        return coordinate.x();
     }
 
     public int getY() {
-        return y;
+        return coordinate.y();
     }
 
     public String getDirection() {
